@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"math/rand"
 	"time"
 
 	tb "gopkg.in/tucnak/telebot.v2"
@@ -35,9 +37,16 @@ func main() {
 	poll.AddOptions("Yes", "No")
 
 	b.Handle("/start", func(m *tb.Message) {
+		rand.Seed(time.Now().UnixNano())
+		randomNum := random(86400, 518400)
+		fmt.Println(randomNum)
+		time.Sleep(time.Duration(randomNum) * time.Second)
 		b.Reply(m, poll)
 
 	})
 
 	b.Start()
+}
+func random(min int, max int) int {
+	return rand.Intn(max-min) + min
 }
