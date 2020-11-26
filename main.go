@@ -4,12 +4,21 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"net/http"
+	"os"
 	"time"
 
 	tb "gopkg.in/tucnak/telebot.v2"
 )
 
 func main() {
+	port := os.Getenv("PORT")
+	http.HandleFunc("/", Bot)
+	log.Print("Listening on:" + port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
+
+}
+func Bot() {
 	b, err := tb.NewBot(tb.Settings{
 		// You can also set custom API URL.
 		// If field is empty it equals to "https://api.telegram.org".
@@ -26,7 +35,7 @@ func main() {
 	}
 
 	b.Handle("/hello", func(m *tb.Message) {
-		b.Reply(m, "Hello dotadrochers😈\n\nYou can control me by sending these commands:\n\n/hello - info about me.\n/start  - this command run process which sends voting poll in random time during the next 7 days from the moment it started.\n(use only one time its recursive process)")
+		b.Reply(m, "Hello dotadrochers😈\n\nYou can control me by sending these commands:\n\n/hello - info about me.\n/start  - this command run process which sends voting poll in random time during the next 5 days from the moment it started.\n(use only one time its recursive process)")
 	})
 
 	poll := &tb.Poll{
@@ -46,7 +55,7 @@ func main() {
 			time.Sleep(time.Duration(randomNum) * time.Second)
 			b.Reply(m, poll)
 			fmt.Println(max - randomNum)
-			time.Sleep(time.Duration(max-randomNum) * time.Second)
+			time.Sleep(time.Duration(max-randomNum+min+min) * time.Second)
 		}
 	})
 
