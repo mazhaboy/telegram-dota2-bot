@@ -14,12 +14,12 @@ import (
 
 func main() {
 	port := os.Getenv("PORT")
-	http.HandleFunc("/", Bot)
+	http.HandleFunc("/", bot)
 	log.Print("Listening on:" + port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 
 }
-func Bot(w http.ResponseWriter, r *http.Request) {
+func bot(w http.ResponseWriter, r *http.Request) {
 
 	io.WriteString(w, "Hello bot!")
 	b, err := tb.NewBot(tb.Settings{
