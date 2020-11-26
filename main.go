@@ -25,8 +25,8 @@ func main() {
 		return
 	}
 
-	b.Handle("/hello", func(m *tb.Message) {
-		b.Send(m.Sender, "Hello World!")
+	b.Handle("/start", func(m *tb.Message) {
+		b.Reply(m, "Hello dotadrochers😈\nLet's start our game.")
 	})
 
 	poll := &tb.Poll{
@@ -35,14 +35,19 @@ func main() {
 	}
 
 	poll.AddOptions("Yes", "No")
+	max := 432000
+	min := 86400
 
-	b.Handle("/start", func(m *tb.Message) {
-		rand.Seed(time.Now().UnixNano())
-		randomNum := random(86400, 518400)
-		fmt.Println(randomNum)
-		time.Sleep(time.Duration(randomNum) * time.Second)
-		b.Reply(m, poll)
-
+	b.Handle("/kettik", func(m *tb.Message) {
+		for {
+			rand.Seed(time.Now().UnixNano())
+			randomNum := random(min, max)
+			fmt.Println(randomNum)
+			time.Sleep(time.Duration(randomNum) * time.Second)
+			b.Reply(m, poll)
+			fmt.Println(max - randomNum)
+			time.Sleep(time.Duration(max-randomNum) * time.Second)
+		}
 	})
 
 	b.Start()
