@@ -2,14 +2,26 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"math/rand"
+	"net/http"
+	"os"
 	"time"
 
 	tb "gopkg.in/tucnak/telebot.v2"
 )
 
 func main() {
+	port := os.Getenv("PORT")
+	http.HandleFunc("/", Bot)
+	log.Print("Listening on:" + port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
+
+}
+func Bot(w http.ResponseWriter, r *http.Request) {
+
+	io.WriteString(w, "Hello bot!")
 	b, err := tb.NewBot(tb.Settings{
 		// You can also set custom API URL.
 		// If field is empty it equals to "https://api.telegram.org".
@@ -52,7 +64,6 @@ func main() {
 
 	b.Start()
 }
-
 func random(min int, max int) int {
 	return rand.Intn(max-min) + min
 }
