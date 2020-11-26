@@ -25,8 +25,8 @@ func main() {
 		return
 	}
 
-	b.Handle("/start", func(m *tb.Message) {
-		b.Reply(m, "Hello dotadrochers😈\nLet's start our game.")
+	b.Handle("/hello", func(m *tb.Message) {
+		b.Reply(m, "Hello dotadrochers😈\n\nYou can control me by sending these commands:\n\n/hello - info about me.\n/start  - this command run process which sends voting poll in random time during the next 7 days from the moment it started.\n(use only one time its recursive process)")
 	})
 
 	poll := &tb.Poll{
@@ -38,7 +38,7 @@ func main() {
 	max := 432000
 	min := 86400
 
-	b.Handle("/kettik", func(m *tb.Message) {
+	b.Handle("/start", func(m *tb.Message) {
 		for {
 			rand.Seed(time.Now().UnixNano())
 			randomNum := random(min, max)
