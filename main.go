@@ -32,6 +32,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	b.Handle("/hello", func(m *tb.Message) {
 		b.Reply(m, "Hello dotadrochers😈\n\nYou can control me by sending these commands:\n\n/hello - info about me.\n/start  - this command run process which sends voting poll in random time during the next 5 days from the moment it started.\n(use only one time its recursive process)")
 	})
