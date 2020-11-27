@@ -47,12 +47,15 @@ func main() {
 	min := 0
 
 	b.Handle("/start", func(m *tb.Message) {
-		rand.Seed(time.Now().UnixNano())
-		randomNum := random(min, max)
-		fmt.Println(randomNum)
-		time.Sleep(time.Duration(randomNum) * time.Second)
-		b.Reply(m, poll)
-
+		if m.Chat.Username == "@majazzzzz" {
+			rand.Seed(time.Now().UnixNano())
+			randomNum := random(min, max)
+			fmt.Println(randomNum)
+			time.Sleep(time.Duration(randomNum) * time.Second)
+			b.Reply(m, poll)
+		} else {
+			b.Reply(m, "You are not alowed to use this command(")
+		}
 	})
 
 	b.Start()
