@@ -47,7 +47,7 @@ func main() {
 	min := 0
 
 	b.Handle("/start", func(m *tb.Message) {
-		if m.Chat.Username == "@majazzzzz" {
+		if m.Chat.Username == "majazzzzz" {
 			rand.Seed(time.Now().UnixNano())
 			randomNum := random(min, max)
 			fmt.Println(randomNum)
