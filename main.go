@@ -23,8 +23,8 @@ func main() {
 		Endpoint: &tb.WebhookEndpoint{PublicURL: publicURL},
 	}
 	pref := tb.Settings{
-		Token:  token,
-		URL:    "https://api.telegram.org/bot",
+		Token: token,
+		// URL:    "https://api.telegram.org/bot1476386207:AAEG5kTR8KL2A3xJN5xmGF5ODVwTxxnZWT4",
 		Poller: webhook,
 	}
 
