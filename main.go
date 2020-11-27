@@ -45,19 +45,16 @@ func main() {
 	poll.AddOptions("Yes", "No")
 	// max := 432000
 	// min := 86400
-	max := 50
-	min := 10
+	max := 20
+	min := 3
 
 	b.Handle("/start", func(m *tb.Message) {
-		for {
-			rand.Seed(time.Now().UnixNano())
-			randomNum := random(min, max)
-			fmt.Println(randomNum)
-			time.Sleep(time.Duration(randomNum) * time.Second)
-			b.Reply(m, poll)
-			fmt.Println(max - randomNum)
-			time.Sleep(time.Duration(max-randomNum+min+min) * time.Second)
-		}
+		rand.Seed(time.Now().UnixNano())
+		randomNum := random(min, max)
+		fmt.Println(randomNum)
+		time.Sleep(time.Duration(randomNum) * time.Second)
+		b.Reply(m, poll)
+
 	})
 
 	b.Start()
