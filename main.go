@@ -24,6 +24,7 @@ func main() {
 	}
 	pref := tb.Settings{
 		Token:  token,
+		URL:    "https://api.telegram.org/bot",
 		Poller: webhook,
 	}
 
