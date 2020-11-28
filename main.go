@@ -11,20 +11,20 @@ import (
 )
 
 var (
-	port      = os.Getenv("PORT")       // sets automatically
-	publicURL = os.Getenv("PUBLIC_URL") // you must add it to your config vars
-	token     = os.Getenv("TOKEN")      // you must add it to your config vars
+	port      = os.Getenv("PORT")
+	publicURL = os.Getenv("PUBLIC_URL")
+	token     = os.Getenv("TOKEN")
 )
 
 func main() {
-	//https://api.telegram.org1476386207:AAEG5kTR8KL2A3xJN5xmGF5ODVwTxxnZWT4
+
 	webhook := &tb.Webhook{
 		Listen:   ":" + port,
 		Endpoint: &tb.WebhookEndpoint{PublicURL: publicURL},
 	}
 	pref := tb.Settings{
 		Token: token,
-		// URL:    "https://api.telegram.org/bot1476386207:AAEG5kTR8KL2A3xJN5xmGF5ODVwTxxnZWT4",
+
 		Poller: webhook,
 	}
 
